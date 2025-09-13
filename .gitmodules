@@ -50,3 +50,6 @@
 	path = release_scripts
 	url = https://chrome-internal.googlesource.com/chrome/tools/release/scripts
 	gclient-condition = checkout_internal
+[submodule "turboci/proto"]
+	path = turboci/proto
+	url = https://chromium.googlesource.com/infra/turboci/proto
