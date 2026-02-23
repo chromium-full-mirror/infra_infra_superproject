@@ -1,0 +1,69 @@
+# Invoked via "/roll ResultDB to canary" in Gemini CLI.
+
+description = "Creates a CL to do a manual release of the given project."
+prompt = """
+Please create a gerrit change to do a manual release of the project as
+instructed here: `{{args}}`
+
+# Steps to do a manual release
+
+First, identify whether the app is a GAE app, Kubernetes (k8s) app or Cloud
+Run app, by listing these directories, using the list_directory tool
+with respect_git_ignore=false explicitly set:
+
+- GAE apps: data/gae/apps
+- K8s apps: data/k8s/projects
+- Cloud run apps: data/cloud-run/projects
+
+Then follow the section corresponding to your chosen app.
+
+## GAE apps
+
+1. Checkout and pull the main branch in the `data/gae`
+   git repository, i.e.
+   cd data/gae
+   git checkout main
+   git pull
+2. Create a branch for the roll; deleting the existing branch (if any first)
+   git branch -D AppRoll
+   git branch -b AppRoll
+3. With your working directory as `data/gae/scripts`, run the
+   promote script:
+   ./promote.py [app-name] [--canary] [--stable] --commit
+
+   Where app-name is the app name from step 1, e.g. `luci-analysis`.
+
+   The --canary flag rolls to canary, --stable rolls to stable.
+   If instruction above do not specify, assume we want to roll to canary
+   and stable at the same time and pass both --stable and --canary.
+   If the instruction above say to roll to stable, pass --stable only.
+   If the instruction above says to roll to canary, pass --canary only.
+
+4. Upload the CL using the git cl upload command:
+   `git cl upload -f`
+   (exactly like this, we want to run pre-upload hooks and do
+   not want to get stuck in the interactive commit message editor)
+
+## Kubernetes apps
+
+Similar to GAE apps, with the following modifications:
+
+1. The base directory of the k8s config repository is
+  `data/k8s`. Run `git checkout main` from this directory.
+2. Unchanged.
+3. Use the ./promote.py script from the working directory
+   `data/k8s/scripts`.
+4. Unchanged.
+
+## Cloud run apps
+
+Similar to GAE apps, with the following modifications:
+
+1. The base directory of the cloud run config repository is
+  `data/cloud-run`. Run `git checkout main` from this directory.
+2. Unchanged.
+3. Use the ./promote.py script from the working directory
+  `data/cloud-run/scripts`.
+4. Unchanged.
+
+"""
