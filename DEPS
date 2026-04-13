@@ -19,7 +19,7 @@ deps = {
   "gcloud": {
     'packages': [
       {
-        'package': 'infra/3pp/tools/gcloud/${{os=mac,linux}}-${{arch=amd64}}',
+        'package': 'infra/3pp/tools/gcloud/${{os=mac,linux}}-${{arch}}',
         'version': 'version:2@427.0.0.chromium.3',
       }
     ],
