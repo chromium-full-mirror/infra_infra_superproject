@@ -8,14 +8,14 @@ instructed here: `{{args}}`
 # Steps to do a manual release
 
 First, identify whether the app is a GAE app, Kubernetes (k8s) app or Cloud
-Run app, by listing these directories, using the list_directory tool
-with respect_git_ignore=false explicitly set:
+Run app (or uses a mix of these platforms), by listing these directories, using
+the list_directory tool with respect_git_ignore=false explicitly set:
 
 - GAE apps: data/gae/apps
 - K8s apps: data/k8s/projects
 - Cloud run apps: data/cloud-run/projects
 
-Then follow the section corresponding to your chosen app.
+Then follow the section(s) corresponding to your identified platform(s).
 
 ## GAE apps
 
