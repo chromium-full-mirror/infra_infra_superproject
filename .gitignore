@@ -8,7 +8,6 @@
 /systems
 /data
 /release_scripts
-/gcloud
 /golang
 /.cipd
 /.gclient*

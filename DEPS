@@ -14,19 +14,6 @@ vars = {
   'chrome_internal_git': 'https://chrome-internal.googlesource.com',
 }
 
-
-deps = {
-  "gcloud": {
-    'packages': [
-      {
-        'package': 'infra/3pp/tools/gcloud/${{os=mac,linux}}-${{arch}}',
-        'version': 'version:2@427.0.0.chromium.3',
-      }
-    ],
-    'dep_type': 'cipd',
-  },
-}
-
 hooks = [
   {
     "pattern": ".",
